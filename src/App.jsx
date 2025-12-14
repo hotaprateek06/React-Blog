@@ -52,7 +52,6 @@ function App() {
     localStorage.setItem("posts", JSON.stringify(posts));
   }, [posts]);
 
-  /* Toast helper */
   const showToast = (msg) => {
     setToast(msg);
     setTimeout(() => setToast(""), 2000);
@@ -112,19 +111,32 @@ function App() {
                   posts={posts}
                   deletePost={deletePost}
                   loading={loading}
-                  showToast={showToast}   {/* ✅ IMPORTANT */}
+                  showToast={showToast}
                 />
               </PageWrapper>
             }
           />
 
-          <Route path="/create" element={<CreatePost addPost={addPost} />} />
+          <Route
+            path="/create"
+            element={<CreatePost addPost={addPost} />}
+          />
+
           <Route
             path="/edit/:id"
             element={<EditPost posts={posts} updatePost={updatePost} />}
           />
-          <Route path="/post/:id" element={<PostDetail posts={posts} />} />
-          <Route path="/profile" element={<Profile posts={posts} />} />
+
+          <Route
+            path="/post/:id"
+            element={<PostDetail posts={posts} />}
+          />
+
+          <Route
+            path="/profile"
+            element={<Profile posts={posts} />}
+          />
+
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </AnimatePresence>

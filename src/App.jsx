@@ -52,6 +52,12 @@ function App() {
     localStorage.setItem("posts", JSON.stringify(posts));
   }, [posts]);
 
+  /* Toast helper */
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(""), 2000);
+  };
+
   const addPost = (post) => {
     setPosts((p) => [...p, post]);
     showToast("Post created");
@@ -65,11 +71,6 @@ function App() {
   const updatePost = (post) => {
     setPosts((p) => p.map((x) => (x.id === post.id ? post : x)));
     showToast("Post updated");
-  };
-
-  const showToast = (msg) => {
-    setToast(msg);
-    setTimeout(() => setToast(""), 2000);
   };
 
   const logout = () => {
@@ -111,10 +112,12 @@ function App() {
                   posts={posts}
                   deletePost={deletePost}
                   loading={loading}
+                  showToast={showToast}   {/* ✅ IMPORTANT */}
                 />
               </PageWrapper>
             }
           />
+
           <Route path="/create" element={<CreatePost addPost={addPost} />} />
           <Route
             path="/edit/:id"
@@ -130,4 +133,3 @@ function App() {
 }
 
 export default App;
-
